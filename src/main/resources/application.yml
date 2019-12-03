@@ -1,1 +1,16 @@
-
+server:
+  port: 8080
+  servlet:
+    context-path: /homeManage
+spring:
+  application:
+    name: homeManage
+  datasource:
+    url: jdbc:mysql://localhost:3306/homemanage?useUnicode=true&serverTimezone=UTC&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
