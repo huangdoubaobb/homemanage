@@ -14,3 +14,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  mvc:
+    static-path-pattern: /**
+  devtools:
+    restart:
+          #需要实时更新的目录
+      additional-paths: resources/**,static/**,templates/**
