@@ -22,7 +22,7 @@ public class LoginController {
         return "/login/login";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/logining")
     public String index(Model model) {
         return "/login/login";
     }
