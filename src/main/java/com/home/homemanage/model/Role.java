@@ -1,8 +1,10 @@
 package com.home.homemanage.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,16 +22,28 @@ public class Role {
     /** 主键 */
     @Id
     @GeneratedValue
-    @Column(name = "ID", unique = true, length = 32, nullable = false)
-    private String id;
+    @Column(name = "role_id", unique = true, length = 32, nullable = false)
+    private String roleId;
 
     private String roleName;
 
-    @JoinTable(name="sys_role_to_permissions",
-            //中间表product_id字段
-            joinColumns={@JoinColumn(name="employee_id",referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="project_id",referencedColumnName="id")}
+    private String remark;
+
+    /** 创建日期 */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false)
+    @CreatedDate
+    private Date createDate;
+
+    /** 修改时间 */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", nullable = false)
+    private Date updateDate;
+
+    @JoinTable(name="role_menu",
+            joinColumns={@JoinColumn(name="role_id")},
+            inverseJoinColumns={@JoinColumn(name="menu_id")}
     )
     @ManyToMany
-    List<Permissions> permissions;
+    List<Menu> permissions;
 }

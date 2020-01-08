@@ -57,7 +57,7 @@ public class ShiroConfig {
         // 设置登录成功跳转Url
         bean.setSuccessUrl("/main");
         // 设置登录跳转Url
-        bean.setLoginUrl("/toLogin");
+        bean.setLoginUrl("/login");
         // 设置未授权提示Url
         bean.setUnauthorizedUrl("/error/unAuth");
 
@@ -70,15 +70,8 @@ public class ShiroConfig {
          **/
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/login","anon");
-        filterMap.put("/user/index","authc");
-        filterMap.put("/vip/index","roles[vip]");
-        filterMap.put("/druid/**", "anon");
+        filterMap.put("/webjars/**", "anon");
         filterMap.put("/static/**","anon");
-        filterMap.put("/templates/**","anon");
-
-        filterMap.put("/**","authc");
-        filterMap.put("/logout", "logout");
-
         bean.setFilterChainDefinitionMap(filterMap);
         return bean;
     }

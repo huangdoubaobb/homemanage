@@ -1,7 +1,6 @@
 package com.home.homemanage.realm;
 
-import com.home.homemanage.model.Permissions;
-import com.home.homemanage.model.Role;
+import com.home.homemanage.model.Menu;
 import com.home.homemanage.model.User;
 import com.home.homemanage.service.LoginService;
 import org.apache.shiro.authc.AuthenticationException;
@@ -38,8 +37,8 @@ public class CustomRealm extends AuthorizingRealm {
         //添加角色
         simpleAuthorizationInfo.addRole(user.getRole().getRoleName());
         //添加权限
-        for (Permissions permissions : user.getRole().getPermissions()) {
-            simpleAuthorizationInfo.addStringPermission(permissions.getPermissionsName());
+        for (Menu menu : user.getRole().getPermissions()) {
+            simpleAuthorizationInfo.addStringPermission(menu.getMenuName());
         }
         return simpleAuthorizationInfo;
     }

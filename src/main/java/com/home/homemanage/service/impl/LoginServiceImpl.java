@@ -1,7 +1,9 @@
 package com.home.homemanage.service.impl;
 
+import com.home.homemanage.dao.UserDao;
 import com.home.homemanage.model.User;
 import com.home.homemanage.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,9 +16,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements LoginService {
 
+    @Autowired
+    private UserDao userDao;
+
     @Override
     public User getUserByName(String name) {
-        return null;
+        return userDao.findByName(name);
     }
 
 }

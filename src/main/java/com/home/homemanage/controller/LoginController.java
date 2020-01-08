@@ -1,11 +1,13 @@
 package com.home.homemanage.controller;
 
-import com.home.homemanage.model.Article;
+import com.home.homemanage.model.User;
+import com.home.homemanage.service.LoginService;
+import com.home.homemanage.until.ResultResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
 
 /**
  * 类名称:LoginController
@@ -17,13 +19,19 @@ import java.util.ArrayList;
 @Controller
 public class LoginController {
 
+
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping("/login")
     public String login(Model model) {
         return "/login/login";
     }
 
-    @RequestMapping("/logining")
-    public String index(Model model) {
-        return "/login/login";
+    @RequestMapping("/toLogin")
+    public ResultResponse toLogin(@RequestBody User user) {
+        ResultResponse result=new ResultResponse();
+        loginService.getUserByName(user.getLoginName());
+        return result;
     }
 }
