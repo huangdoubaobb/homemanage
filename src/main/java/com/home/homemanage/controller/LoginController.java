@@ -1,13 +1,14 @@
 package com.home.homemanage.controller;
 
+import com.home.homemanage.common.AbstractController;
 import com.home.homemanage.model.User;
 import com.home.homemanage.service.LoginService;
 import com.home.homemanage.until.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 类名称:LoginController
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Version 1.0
  */
 @Controller
-public class LoginController {
+public class LoginController extends AbstractController {
 
 
     @Autowired
@@ -29,9 +30,17 @@ public class LoginController {
     }
 
     @RequestMapping("/toLogin")
-    public ResultResponse toLogin(@RequestBody User user) {
+    public ResultResponse toLogin(@RequestParam(value = "loginName", required = false) String loginName,
+                                  @RequestParam(value = "password", required = false) String password) {
         ResultResponse result=new ResultResponse();
-        loginService.getUserByName(user.getLoginName());
+        User user1=loginService.getUserByLoginNameAndPassword(loginName,password);
+        if (null==user1){
+            result.fail();
+            result.message("用户名密码错误，请重试！");
+        }else{
+            result.success();
+            result.message("登录成功");
+        }
         return result;
     }
 }

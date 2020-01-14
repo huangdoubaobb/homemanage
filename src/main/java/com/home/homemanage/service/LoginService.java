@@ -6,4 +6,6 @@ public interface LoginService {
 
     User getUserByName(String name);
 
+    User getUserByLoginNameAndPassword(String loginName,String password);
+
 }
