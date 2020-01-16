@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 类名称:LoginController
@@ -30,7 +31,8 @@ public class LoginController extends AbstractController {
     }
 
     @RequestMapping("/toLogin")
-    public ResultResponse toLogin(@RequestParam(value = "loginName", required = false) String loginName,
+    @ResponseBody
+    public ResultResponse toLogin(@RequestParam(value = "username", required = false) String loginName,
                                   @RequestParam(value = "password", required = false) String password) {
         ResultResponse result=new ResultResponse();
         User user1=loginService.getUserByLoginNameAndPassword(loginName,password);
@@ -42,5 +44,10 @@ public class LoginController extends AbstractController {
             result.message("登录成功");
         }
         return result;
+    }
+
+    @RequestMapping("/index")
+    public String main(Model model) {
+        return "/login/index";
     }
 }
